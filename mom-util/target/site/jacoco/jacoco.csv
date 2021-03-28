@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+mom-util,net.aydini.mom.util.reflection,RWProperty,10,66,1,7,3,5,2,10,1,7
+mom-util,net.aydini.mom.util.reflection,RWMethodName,3,38,0,2,1,4,1,3,1,2
+mom-util,net.aydini.mom.util.string,StringUtil,8,61,1,11,1,8,2,7,1,2

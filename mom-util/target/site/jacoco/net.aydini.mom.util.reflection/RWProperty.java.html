@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RWProperty.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mom-util</a> &gt; <a href="index.source.html" class="el_package">net.aydini.mom.util.reflection</a> &gt; <span class="el_source">RWProperty.java</span></div><h1>RWProperty.java</h1><pre class="source lang-java linenums">package net.aydini.mom.util.reflection;
+
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import net.aydini.mom.common.exception.MomBaseException;
+
+
+/** utility class for finding getter(reader) and setter(writer) methods of a class
+ * 
+ * @author &lt;a href=&quot;mailto:hi@aydini.net&quot;&gt;Aydin Nasrollahpour &lt;/a&gt;
+ *
+ * Mar 27, 2021
+ */
+<span class="nc" id="L20">public final class RWProperty</span>
+{
+
+    public static Optional&lt;Method&gt; getReaderMethod(Class&lt;?&gt; clazz , Field field)
+    {
+<span class="fc" id="L25">        String readerMethodName = RWMethodName.createReaderMethodName(field);</span>
+<span class="pc bpc" id="L26" title="1 of 4 branches missed.">        return Stream.of(getPropertyDescriptors(clazz)).parallel().filter(item-&gt;item.getReadMethod()!= null &amp;&amp; item.getReadMethod().getName().equals(readerMethodName)).map(item-&gt;item.getReadMethod()).findAny();</span>
+    }
+    
+    public static Optional&lt;Method&gt; getWriterMethod(Class&lt;?&gt; clazz , Field field)
+    {
+<span class="fc" id="L31">        String writerMethodName = RWMethodName.createWriterMethodName(field);</span>
+<span class="fc bfc" id="L32" title="All 4 branches covered.">        return Stream.of(getPropertyDescriptors(clazz)).parallel().filter(item-&gt;item.getWriteMethod()!= null &amp;&amp; item.getWriteMethod().getName().equals(writerMethodName)).map(item-&gt;item.getWriteMethod()).findAny();</span>
+        
+    }
+    
+    
+    private static PropertyDescriptor[] getPropertyDescriptors(Class&lt;?&gt; clazz)
+    {
+        try
+        {
+<span class="fc" id="L41">            return Introspector.getBeanInfo(clazz).getPropertyDescriptors();</span>
+        }
+<span class="nc" id="L43">        catch (IntrospectionException e)</span>
+        {
+<span class="nc" id="L45">            throw new MomBaseException(e.getMessage());</span>
+        }
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

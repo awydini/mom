@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RWMethodName.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mom-util</a> &gt; <a href="index.source.html" class="el_package">net.aydini.mom.util.reflection</a> &gt; <span class="el_source">RWMethodName.java</span></div><h1>RWMethodName.java</h1><pre class="source lang-java linenums">package net.aydini.mom.util.reflection;
+
+import java.lang.reflect.Field;
+
+import net.aydini.mom.util.string.StringUtil;
+
+/** utility class for creating getter/setter method name by field name
+ * 
+ * @author &lt;a href=&quot;mailto:hi@aydini.net&quot;&gt;Aydin Nasrollahpour &lt;/a&gt;
+ *
+ * Mar 27, 2021
+ */
+<span class="nc" id="L13">public final class RWMethodName</span>
+{
+    
+    private final static String READER_PREFIX = &quot;get&quot;;
+    private final static String boolean_READER_PREFIX = &quot;is&quot;;
+    private final static String WRITER_PREFIX = &quot;set&quot;;
+    
+    public static String createReaderMethodName(Field field)
+    {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if(field.getType().equals(boolean.class))</span>
+<span class="fc" id="L23">            return boolean_READER_PREFIX + StringUtil.toUpperFirstLetter(field.getName());</span>
+<span class="fc" id="L24">        return READER_PREFIX  + StringUtil.toUpperFirstLetter(field.getName());</span>
+    }
+    
+    public static String createWriterMethodName(Field field)
+    {
+<span class="fc" id="L29">        return WRITER_PREFIX + StringUtil.toUpperFirstLetter(field.getName());</span>
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
