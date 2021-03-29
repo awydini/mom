@@ -12,4 +12,12 @@
 	</parent>
 
 
+	<dependencies>
+		<dependency>
+			<groupId>net.aydini.mom</groupId>
+			<artifactId>mom-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
 </project>
