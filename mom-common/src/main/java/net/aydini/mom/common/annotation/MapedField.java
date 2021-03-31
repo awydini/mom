@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.aydini.mom.common.domain.DefaultValue;
-import net.aydini.mom.common.service.Maper;
+import net.aydini.mom.common.service.maper.Maper;
 
 /**
  * 

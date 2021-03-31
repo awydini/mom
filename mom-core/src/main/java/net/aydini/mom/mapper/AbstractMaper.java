@@ -1,7 +1,7 @@
 package net.aydini.mom.mapper;
 
 import net.aydini.mom.common.holder.MaperEntity;
-import net.aydini.mom.common.service.ObjectMaper;
+import net.aydini.mom.common.service.maper.ObjectMaper;
 
 /**
  * 

@@ -1,9 +1,9 @@
 package net.aydini.mom.mapper;
 
+import net.aydini.mom.common.domain.Condition;
 import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.holder.MaperEntity;
-import net.aydini.mom.common.service.Condition;
-import net.aydini.mom.common.service.ObjectMaper;
+import net.aydini.mom.common.service.maper.ObjectMaper;
 
 /**
  * 

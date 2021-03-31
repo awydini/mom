@@ -1,6 +1,6 @@
 package net.aydini.mom.common.holder;
 
-import net.aydini.mom.common.service.Condition;
+import net.aydini.mom.common.domain.Condition;
 
 /**
  * 
