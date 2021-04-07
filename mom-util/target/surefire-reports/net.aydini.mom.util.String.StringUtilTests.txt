@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: net.aydini.mom.util.String.StringUtilTests
 -------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s - in net.aydini.mom.util.String.StringUtilTests
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s - in net.aydini.mom.util.String.StringUtilTests
