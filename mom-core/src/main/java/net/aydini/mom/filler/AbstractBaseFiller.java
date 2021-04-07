@@ -3,7 +3,7 @@ package net.aydini.mom.filler;
 import java.lang.reflect.Field;
 
 import net.aydini.mom.common.holder.MaperEntity;
-import net.aydini.mom.common.service.filler.ObjectFiller;
+import net.aydini.mom.common.service.filler.FieldFiller;
 
 /**
  * 
@@ -11,7 +11,7 @@ import net.aydini.mom.common.service.filler.ObjectFiller;
  *
  * Mar 31, 2021
  */
-public abstract class AbstractBaseFiller implements ObjectFiller
+public abstract class AbstractBaseFiller implements FieldFiller
 {
     
     public final <T> void fill(MaperEntity<T> maperEntity , Field field)
