@@ -142,11 +142,11 @@ public class ReflectionUtil
     }
     
     
-    public static <T>  T instantiate(Class<T> clazz)
+    public static <T>  T instantiate(Class<T> clazz,Object ... args)
     {
         try
         {
-            return clazz.getConstructor().newInstance(null);
+            return clazz.getConstructor().newInstance(args);
         }
         catch (Exception e)
         {
