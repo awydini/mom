@@ -17,11 +17,11 @@ public abstract class AbstractBaseFiller implements FieldFiller
     public final <T> void fill(MaperEntity<T> maperEntity , Field field)
     {
             Object fieldValue = getValueOfSourceField(maperEntity, field);
-            SetValueToTarget(fieldValue);
+            SetValueToTarget(maperEntity,field,fieldValue);
     }
     
-    protected abstract <T> Object getValueOfSourceField(MaperEntity<T> maperEntity , Field field);
+    protected abstract <T> Object getValueOfSourceField(MaperEntity<T> maperEntity , Field targetObjectField);
     
-    protected abstract void SetValueToTarget(Object object);
+    protected abstract <T> void SetValueToTarget(MaperEntity<T> maperEntity ,Field targetObjectField ,Object object);
 
 }
