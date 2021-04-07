@@ -87,7 +87,7 @@ public class ReflectionUtil
     {
         Optional<Method> optionalGetterMethod = RWProperty.getReaderMethod(object.getClass(), field);
         if(optionalGetterMethod.isPresent())
-        	return optionalGetterMethod.get();
+        	return optionalGetterMethod.get().invoke(object, new Object[] {});
         return null;
     }
 
