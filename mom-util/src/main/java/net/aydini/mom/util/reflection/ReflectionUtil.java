@@ -159,4 +159,9 @@ public class ReflectionUtil
         return clazz.isInterface();
     }
     
+    
+    public static boolean sameTypes(Class<?> t1 , Class<?> t2)
+    {
+        return t1.equals(t2);
+    }
 }
