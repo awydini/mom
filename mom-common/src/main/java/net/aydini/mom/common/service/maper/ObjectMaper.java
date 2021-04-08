@@ -1,6 +1,6 @@
 package net.aydini.mom.common.service.maper;
 
-import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.service.filler.Fillable;
 
 /**
  * 
@@ -8,8 +8,8 @@ import net.aydini.mom.common.holder.MaperEntity;
  *
  * Mar 29, 2021
  */
-public interface ObjectMaper
+public interface ObjectMaper extends Fillable
 {
-    public <T> T map(MaperEntity<T> maperEntity);
+     <T> T map(Object source, Class<T> targetClass);
     
 }

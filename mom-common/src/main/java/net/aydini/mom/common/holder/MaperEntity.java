@@ -27,7 +27,7 @@ public class MaperEntity<T>
         try
         {
             assert targetClass != null : "target class is null";
-            target = targetClass.newInstance();
+            target = targetClass.getConstructor().newInstance(new Object[] {});
         }
         catch (Exception e)
         {
