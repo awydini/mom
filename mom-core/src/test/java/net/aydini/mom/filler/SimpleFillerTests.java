@@ -3,7 +3,7 @@ package net.aydini.mom.filler;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,12 @@ import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
+/**
+ * 
+ * @author <a href="mailto:hi@aydini.net">Aydin Nasrollahpour </a>
+ *
+ * Apr 7, 2021
+ */
 public class SimpleFillerTests
 {
 
@@ -23,7 +29,7 @@ public class SimpleFillerTests
     public void init()
     {
         filler = new SimpleFieldFiller();
-        maperEntity = new MaperEntity<>(new UserDto("aydin","123",new Date()), User.class);
+        maperEntity = new MaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class);
     }
     
     @Test
