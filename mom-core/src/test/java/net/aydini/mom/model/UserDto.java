@@ -1,6 +1,6 @@
 package net.aydini.mom.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 
@@ -13,7 +13,20 @@ public class UserDto
     
     private String username;
     private String password;
-    private Date registerDate;
+    private LocalDate registerDate;
+    
+    private Person person;
+    
+    
+    
+    public Person getPerson()
+    {
+        return person;
+    }
+    public void setPerson(Person person)
+    {
+        this.person = person;
+    }
     public String getPassword()
     {
         return password;
@@ -23,11 +36,11 @@ public class UserDto
         this.password = password;
     }
     
-    public Date getRegisterDate()
+    public LocalDate getRegisterDate()
     {
         return registerDate;
     }
-    public void setRegisterDate(Date registerDate)
+    public void setRegisterDate(LocalDate registerDate)
     {
         this.registerDate = registerDate;
     }
@@ -39,7 +52,7 @@ public class UserDto
     {
         this.username = username;
     }
-    public UserDto(String username, String password, Date registerDate)
+    public UserDto(String username, String password, LocalDate registerDate)
     {
         super();
         this.username = username;
