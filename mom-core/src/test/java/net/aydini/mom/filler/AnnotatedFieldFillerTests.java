@@ -30,7 +30,7 @@ public class AnnotatedFieldFillerTests
     @BeforeEach
     public void init()
     {
-        filler = new AnnotatedFieldFiller();
+        filler = new AnnotatedFieldFiller(null);
         maperEntity = new MaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class);
     }
     
