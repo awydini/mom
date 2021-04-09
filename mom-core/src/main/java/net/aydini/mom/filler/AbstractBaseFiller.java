@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
-import net.aydini.mom.mapper.AbstractObjectMaper;
+import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
 /**
@@ -22,6 +22,14 @@ public abstract class AbstractBaseFiller implements FieldFiller
 {
 
     private final static Logger log = LoggerFactory.getLogger(AbstractBaseFiller.class);
+    
+    private final ObjectMaper objectMapper;
+    
+    protected AbstractBaseFiller(ObjectMaper objectMapper)
+    {
+        this.objectMapper = objectMapper;
+    }
+    
 
     public final <T> void fill(MaperEntity<T> maperEntity, Field field)
     {
@@ -30,10 +38,9 @@ public abstract class AbstractBaseFiller implements FieldFiller
         if (ReflectionUtil.isSimpleType(fieldValue.get().getClass())
                 || ReflectionUtil.sameTypes(fieldValue.get().getClass(), field.getType()))
             SetValueToTarget(maperEntity, field, fieldValue.get());
-        else SetValueToTarget(maperEntity, field, getMaper().map(fieldValue.get(), field.getType()));
+        else SetValueToTarget(maperEntity, field, objectMapper.map(fieldValue.get(), field.getType()));
     }
 
-    protected abstract AbstractObjectMaper getMaper();
 
     protected abstract <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field targetObjectField);
 

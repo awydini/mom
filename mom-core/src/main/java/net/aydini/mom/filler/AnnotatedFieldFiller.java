@@ -11,7 +11,7 @@ import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.maper.Maper;
-import net.aydini.mom.mapper.AbstractObjectMaper;
+import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
 /**
@@ -22,6 +22,11 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
  */
 public class AnnotatedFieldFiller extends AbstractBaseFiller
 {
+
+    public AnnotatedFieldFiller(ObjectMaper objectMapper)
+    {
+        super(objectMapper);
+    }
 
     private final static Logger log = LoggerFactory.getLogger(AnnotatedFieldFiller.class);
 
@@ -78,13 +83,6 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         if (maper.isPresent()) return maper.get().map(value);
         return value;
 
-    }
-
-    @Override
-    protected AbstractObjectMaper getMaper()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     private <T> Object getValueByFieldName(MaperEntity<T> maperEntity, MapedField mapedField)

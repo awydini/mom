@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.mapper.SimpleObjectMaper;
 import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
 import net.aydini.mom.util.reflection.ReflectionUtil;
@@ -28,7 +29,7 @@ public class SimpleFillerTests
     @BeforeEach
     public void init()
     {
-        filler = new SimpleFieldFiller();
+        filler = new SimpleFieldFiller(new SimpleObjectMaper());
         maperEntity = new MaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class);
     }
     

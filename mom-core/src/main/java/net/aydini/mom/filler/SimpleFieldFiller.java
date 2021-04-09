@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.holder.MaperEntity;
-import net.aydini.mom.mapper.AbstractObjectMaper;
+import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
 /**
@@ -20,6 +20,11 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
  */
 public class SimpleFieldFiller extends AbstractBaseFiller
 {
+
+    public SimpleFieldFiller(ObjectMaper objectMapper)
+    {
+        super(objectMapper);
+    }
 
     private final static Logger log = LoggerFactory.getLogger(SimpleFieldFiller.class);
 
@@ -37,11 +42,5 @@ public class SimpleFieldFiller extends AbstractBaseFiller
         }
     }
 
-    @Override
-    protected AbstractObjectMaper getMaper()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
 }
