@@ -13,7 +13,7 @@ public class MaperEntity<T>
 
     private final Object source;
     private final Class<T> targetClass;
-    private Object target;
+    private T target;
 
     public MaperEntity(Object source, Class<T> targetClass)
     {
@@ -45,7 +45,7 @@ public class MaperEntity<T>
         return targetClass;
     }
 
-    public Object getTarget()
+    public T getTarget()
     {
         return target;
     }
