@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import net.aydini.mom.model.Person;
+import net.aydini.mom.model.SuperUser;
 import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
 
@@ -31,7 +32,7 @@ public class SimpleObjectMaperTests
     
     
     @Test
-    public void objectMaperTests()
+    public void objectMaperTest()
     {
         User user = objectMaper.map(userDto, User.class);
         assertEquals(userDto.getUsername(), user.getUsername());
@@ -42,5 +43,19 @@ public class SimpleObjectMaperTests
         assertEquals(userDto.getPerson().getAge(), user.getPerson().getAge());
         
     }
+
     
+    
+    @Test
+    public void objectMaperTestWithDifferentPersonType()
+    {
+        SuperUser user = objectMaper.map(userDto, SuperUser.class);
+        assertEquals(userDto.getUsername(), user.getUsername());
+        assertEquals(userDto.getPassword(), user.getPassword());
+        assertEquals(userDto.getRegisterDate(), user.getRegisterDate());
+        assertNotNull(user.getPerson());
+        assertEquals(userDto.getPerson().getName(), user.getPerson().getName());
+        assertEquals(userDto.getPerson().getAge(), user.getPerson().getAge());
+        
+    }
 }
