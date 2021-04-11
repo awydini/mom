@@ -18,35 +18,44 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
  * 
  * @author <a href="mailto:hi@aydini.net">Aydin Nasrollahpour </a>
  *
- * Apr 7, 2021
+ *         Apr 7, 2021
  */
 public class SimpleFillerTests
 {
 
     private AbstractBaseFiller filler;
     private MaperEntity<User> maperEntity;
-    
+
     @BeforeEach
     public void init()
     {
         filler = new SimpleFieldFiller(new SimpleObjectMaper());
-        maperEntity = new MaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class);
+        UserDto dto = new UserDto("aydin", "123", LocalDate.now());
+        dto.setActive(true);
+        maperEntity = new MaperEntity<>(dto, User.class);
     }
-    
+
     @Test
     public void fillStringFieldTest()
     {
         filler.fill(maperEntity, ReflectionUtil.findClassFieldByFieldName(User.class, "username"));
         assertNotNull(maperEntity.getTarget());
-        assertEquals(( (UserDto) maperEntity.getSource()).getUsername(), ((User)maperEntity.getTarget()).getUsername());
+        assertEquals(((UserDto) maperEntity.getSource()).getUsername(), ((User) maperEntity.getTarget()).getUsername());
     }
-    
-    
+
     @Test
     public void fillDateTest()
     {
         filler.fill(maperEntity, ReflectionUtil.findClassFieldByFieldName(User.class, "registerDate"));
         assertNotNull(maperEntity.getTarget());
-        assertEquals(( (UserDto) maperEntity.getSource()).getRegisterDate(), ((User)maperEntity.getTarget()).getRegisterDate());
+        assertEquals(((UserDto) maperEntity.getSource()).getRegisterDate(), ((User) maperEntity.getTarget()).getRegisterDate());
+    }
+
+    @Test
+    public void fillBooleanFieldTest()
+    {
+        filler.fill(maperEntity, ReflectionUtil.findClassFieldByFieldName(User.class, "active"));
+        assertNotNull(maperEntity.getTarget());
+        assertEquals(((UserDto) maperEntity.getSource()).isActive(), ((User) maperEntity.getTarget()).isActive());
     }
 }

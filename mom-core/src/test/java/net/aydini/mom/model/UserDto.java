@@ -14,11 +14,21 @@ public class UserDto
     private String username;
     private String password;
     private LocalDate registerDate;
-    
+    private boolean active;
     private Person person;
     
     
     
+    
+    
+    public boolean isActive()
+    {
+        return active;
+    }
+    public void setActive(boolean active)
+    {
+        this.active = active;
+    }
     public Person getPerson()
     {
         return person;
