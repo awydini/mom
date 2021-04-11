@@ -23,7 +23,7 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
 public class AnnotatedFieldFiller extends AbstractBaseFiller
 {
 
-    public AnnotatedFieldFiller(ObjectMaper objectMapper)
+    AnnotatedFieldFiller(ObjectMaper objectMapper)
     {
         super(objectMapper);
     }
