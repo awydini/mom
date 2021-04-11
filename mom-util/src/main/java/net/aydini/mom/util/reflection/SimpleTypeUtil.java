@@ -35,7 +35,15 @@ public class SimpleTypeUtil
 
     public static boolean isSimpleType(Class<?> clazz)
     {
+        if(clazz.isPrimitive())
+            return true;
         return getInstance().SIMPLE_TYPE_LIST.contains(clazz);
     }
 
+   
+    public static boolean isSimpleType(Object object)
+    {
+        return isSimpleType(object.getClass());
+    }
+    
 }

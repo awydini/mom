@@ -25,7 +25,7 @@ public abstract class AbstractBaseFiller implements FieldFiller
     
     private final ObjectMaper objectMapper;
     
-    protected AbstractBaseFiller(ObjectMaper objectMapper)
+    AbstractBaseFiller(ObjectMaper objectMapper)
     {
         this.objectMapper = objectMapper;
     }

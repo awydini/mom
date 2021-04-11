@@ -5,6 +5,7 @@ import java.util.Set;
 
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.maper.ObjectMaper;
+import net.aydini.mom.filler.FillerFactory;
 
 /**
  * 
@@ -23,7 +24,7 @@ public abstract class AbstractObjectMaper implements ObjectMaper
 
     protected  <T> T map(final MaperEntity<T> maperEntity)
     {
-        getMapingFields(maperEntity.getTargetClass()).parallelStream().forEach(item->gettFieldFiller().fill(maperEntity, item));
+        getMapingFields(maperEntity.getTargetClass()).parallelStream().forEach(item->FillerFactory.getFieldFiller(item, this).fill(maperEntity, item));
         return maperEntity.getTarget();
     }
     

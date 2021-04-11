@@ -21,7 +21,7 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
 public class SimpleFieldFiller extends AbstractBaseFiller
 {
 
-    public SimpleFieldFiller(ObjectMaper objectMapper)
+    SimpleFieldFiller(ObjectMaper objectMapper)
     {
         super(objectMapper);
     }
