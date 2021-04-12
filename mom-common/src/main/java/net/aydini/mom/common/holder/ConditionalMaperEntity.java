@@ -8,18 +8,18 @@ import net.aydini.mom.common.domain.Condition;
  *
  *         Mar 29, 2021
  */
-public class ConditionalMaperEntity<T, C> extends MaperEntity<T>
+public class ConditionalMaperEntity<T> extends MaperEntity<T>
 {
 
-    private final Condition<C> condition;
+    private final Condition condition;
 
-    public ConditionalMaperEntity(Object source, Class<T> targetClass, Condition<C> condition)
+    public ConditionalMaperEntity(Object source, Class<T> targetClass, Condition condition)
     {
         super(source, targetClass);
         this.condition = condition;
     }
 
-    public Condition<C> getCondition()
+    public Condition getCondition()
     {
         return condition;
     }

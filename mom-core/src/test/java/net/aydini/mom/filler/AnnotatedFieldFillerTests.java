@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import net.aydini.mom.common.domain.Condition;
 import net.aydini.mom.common.holder.ConditionalMaperEntity;
+import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.model.Person;
 import net.aydini.mom.model.User;
@@ -26,7 +26,7 @@ public class AnnotatedFieldFillerTests
 {
 
     private FieldFiller filler;
-    private ConditionalMaperEntity<User,Condition<Object>> maperEntity;
+    private MaperEntity<User> maperEntity;
     
     @BeforeEach
     public void init()
