@@ -5,31 +5,29 @@ import java.util.Set;
 
 import net.aydini.mom.common.domain.Condition;
 import net.aydini.mom.common.holder.ConditionalMaperEntity;
-import net.aydini.mom.common.service.maper.ObjectMaper;
+import net.aydini.mom.common.service.maper.ConditionalMaper;
 import net.aydini.mom.filler.FillerFactory;
 
 /**
  * 
  * @author <a href="mailto:hi@aydini.net">Aydin Nasrollahpour </a>
  *
- *         Mar 29, 2021
+ * Mar 29, 2021
  */
-public abstract class AbstractObjectMaper implements ObjectMaper 
+public abstract class MegaConditionalMaper implements ConditionalMaper
 {
-
     @Override
-    public final <T> T map(Object source, Class<T> targetClass)
+    public final <T,C> T map(Object source, Class<T> targetClass,Condition<C> condition)
     {
-        return map(new ConditionalMaperEntity<T,Condition<Object>>(source, targetClass,null));
+        return map(new ConditionalMaperEntity<T,C>(source, targetClass,condition));
     }
 
-    protected  <T> T map(final ConditionalMaperEntity<T,Condition<Object>> maperEntity)
+    protected  <T,C> T map(final ConditionalMaperEntity<T,C> maperEntity)
     {
         getMapingFields(maperEntity.getTargetClass()).parallelStream()
-        .forEach(item->FillerFactory.getFieldFiller(item, this).fill(maperEntity, item));
+        .forEach(item->FillerFactory.getFieldFiller(this).fill(maperEntity, item));
         return maperEntity.getTarget();
     }
     
     protected abstract <T> Set<Field> getMapingFields(Class<T> targetClass);
-
 }
