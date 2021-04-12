@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.exception.FillerException;
-import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
@@ -31,7 +31,7 @@ public abstract class AbstractBaseFiller implements FieldFiller
     }
     
 
-    public final <T> void fill(MaperEntity<T> maperEntity, Field field)
+    public final <T,C> void fill(ConditionalMaperEntity<T,C> maperEntity, Field field)
     {
         Optional<Object> fieldValue = getValueOfSourceField(maperEntity, field);
         if (!fieldValue.isPresent()) return;
@@ -42,9 +42,9 @@ public abstract class AbstractBaseFiller implements FieldFiller
     }
 
 
-    protected abstract <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field targetObjectField);
+    protected abstract <T,C> Optional<Object> getValueOfSourceField(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField);
 
-    protected <T> void SetValueToTarget(MaperEntity<T> maperEntity, Field targetObjectField, Object object)
+    protected <T,C> void SetValueToTarget(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField, Object object)
     {
         try
         {

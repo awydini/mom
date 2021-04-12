@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.domain.Condition;
+import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.mapper.SimpleObjectMaper;
 import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
@@ -24,7 +25,7 @@ public class SimpleFillerTests
 {
 
     private AbstractBaseFiller filler;
-    private MaperEntity<User> maperEntity;
+    private ConditionalMaperEntity<User,Condition<Object>> maperEntity;
 
     @BeforeEach
     public void init()
@@ -32,7 +33,7 @@ public class SimpleFillerTests
         filler = new SimpleFieldFiller(new SimpleObjectMaper());
         UserDto dto = new UserDto("aydin", "123", LocalDate.now());
         dto.setActive(true);
-        maperEntity = new MaperEntity<>(dto, User.class);
+        maperEntity = new ConditionalMaperEntity<>(dto, User.class,null);
     }
 
     @Test
