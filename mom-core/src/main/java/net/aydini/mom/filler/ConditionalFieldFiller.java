@@ -1,11 +1,11 @@
 package net.aydini.mom.filler;
 
-import net.aydini.mom.common.service.maper.ObjectMaper;
+import net.aydini.mom.mapper.MegaConditionalMaper;
 
 public class ConditionalFieldFiller extends AnnotatedFieldFiller
 {
     
-    ConditionalFieldFiller(ObjectMaper objectMapper)
+    ConditionalFieldFiller(MegaConditionalMaper objectMapper)
     {
         super(objectMapper);
     }
