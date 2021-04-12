@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 import net.aydini.mom.common.domain.Condition;
-import net.aydini.mom.common.holder.ConditionalMaperEntity;
-import net.aydini.mom.common.service.maper.ConditionalMaper;
+import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.filler.FillerFactory;
+import net.aydini.mom.util.reflection.FieldWarehouse;
 
 /**
  * 
@@ -14,20 +14,30 @@ import net.aydini.mom.filler.FillerFactory;
  *
  * Mar 29, 2021
  */
-public abstract class MegaConditionalMaper implements ConditionalMaper
+public class MegaConditionalMaper extends AbstractObjectMaper
 {
-    @Override
-    public final <T,C> T map(Object source, Class<T> targetClass,Condition<C> condition)
+    private final Condition condition;
+    
+    public MegaConditionalMaper(Condition condition)
     {
-        return map(new ConditionalMaperEntity<T,C>(source, targetClass,condition));
+        this.condition = condition;
     }
 
-    protected  <T,C> T map(final ConditionalMaperEntity<T,C> maperEntity)
+    public Condition getCondition()
+    {
+        return condition;
+    }
+
+
+    protected  <T> T map(final MaperEntity<T> maperEntity)
     {
         getMapingFields(maperEntity.getTargetClass()).parallelStream()
-        .forEach(item->FillerFactory.getFieldFiller(this).fill(maperEntity, item));
+        .forEach(item->FillerFactory.getConditionalFieldFiller(this).fill(maperEntity, item));
         return maperEntity.getTarget();
     }
     
-    protected abstract <T> Set<Field> getMapingFields(Class<T> targetClass);
+    protected  <T> Set<Field> getMapingFields(Class<T> targetClass)
+    {
+        return FieldWarehouse.getClassFields(targetClass);
+    }
 }

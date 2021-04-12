@@ -6,7 +6,7 @@ package net.aydini.mom.common.domain;
  *
  *         Mar 29, 2021
  */
-public interface Condition<C>
+public interface Condition
 {
-    public C getCondition();
+    public <C> C getCondition();
 }

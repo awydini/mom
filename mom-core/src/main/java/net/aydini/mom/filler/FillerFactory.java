@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.service.filler.FieldFiller;
-import net.aydini.mom.common.service.maper.ConditionalMaper;
 import net.aydini.mom.common.service.maper.ObjectMaper;
 
 /**
@@ -22,9 +21,9 @@ public class FillerFactory
         return new SimpleFieldFiller(objectMaper);
     }
 
-    public static FieldFiller getFieldFiller(ConditionalMaper conditionalMaper)
+    public static FieldFiller getConditionalFieldFiller(ObjectMaper objectMaper)
     {
-        return new ConditionalFieldFiller(conditionalMaper);
+        return new ConditionalFieldFiller(objectMaper);
     }
 
 }

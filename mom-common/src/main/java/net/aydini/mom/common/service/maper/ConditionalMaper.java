@@ -8,7 +8,19 @@ import net.aydini.mom.common.domain.Condition;
  *
  *         Mar 29, 2021
  */
-public interface ConditionalMaper 
+public abstract class ConditionalMaper implements ObjectMaper 
 {
-    public <T, C> T map(Object source, Class<T> targetClass, Condition<C> condition);
+    private final Condition condition;
+    
+    public ConditionalMaper(Condition condition)
+    {
+        this.condition = condition;
+    }
+
+    public Condition getCondition()
+    {
+        return condition;
+    }
+    
+    
 }

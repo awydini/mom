@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
-import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.maper.Maper;
 import net.aydini.mom.common.service.maper.ObjectMaper;
@@ -32,7 +31,7 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
     private final static Logger log = LoggerFactory.getLogger(AnnotatedFieldFiller.class);
 
     @Override
-    protected <T,C> Optional<Object> getValueOfSourceField(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField)
+    protected <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field targetObjectField)
     {
         MapedField mapedField = targetObjectField.getAnnotation(MapedField.class);
         if (mapedField == null) throw new FillerException(targetObjectField.getName() + " is not annotated with @MapedField");
