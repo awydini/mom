@@ -2,7 +2,7 @@ package net.aydini.mom.common.service.filler;
 
 import java.lang.reflect.Field;
 
-import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.holder.ConditionalMaperEntity;
 
 /**
  * 
@@ -13,5 +13,5 @@ import net.aydini.mom.common.holder.MaperEntity;
 public interface FieldFiller
 {
 
-    public <T> void fill(MaperEntity<T> maperEntity , Field field);
+    public <T,C> void fill(ConditionalMaperEntity<T,C> maperEntity , Field field);
 }
