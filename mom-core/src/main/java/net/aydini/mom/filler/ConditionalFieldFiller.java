@@ -11,29 +11,38 @@ import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.service.filler.FieldFiller;
+import net.aydini.mom.common.service.maper.ConditionalMaper;
 import net.aydini.mom.common.service.maper.Maper;
-import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
-/**
- * 
- * @author <a href="mailto:hi@aydini.net">Aydin Nasrollahpour </a>
- *
- *         Apr 7, 2021
- */
-public class AnnotatedFieldFiller extends AbstractBaseFiller
+public class ConditionalFieldFiller implements FieldFiller
 {
-
-    AnnotatedFieldFiller(ObjectMaper objectMapper)
+    
+ private final static Logger log = LoggerFactory.getLogger(AbstractBaseFiller.class);
+    
+    private final ConditionalMaper conditionalMaper;
+    
+    ConditionalFieldFiller(ConditionalMaper conditionalMaper)
     {
-        super(objectMapper);
+        this.conditionalMaper = conditionalMaper;
+    }
+    
+
+    public final <T,C> void fill(ConditionalMaperEntity<T,C> maperEntity, Field field)
+    {
+        Optional<Object> fieldValue = getValueOfSourceField(maperEntity, field);
+        if (!fieldValue.isPresent()) return;
+        if (ReflectionUtil.isSimpleType(fieldValue.get().getClass())
+                || ReflectionUtil.sameTypes(fieldValue.get().getClass(), field.getType()))
+            SetValueToTarget(maperEntity, field, fieldValue.get());
+        else SetValueToTarget(maperEntity, field, conditionalMaper.map(fieldValue.get(), field.getType(),maperEntity.getCondition()));
     }
 
-    private final static Logger log = LoggerFactory.getLogger(AnnotatedFieldFiller.class);
 
-    @Override
-    protected <T,C> Optional<Object> getValueOfSourceField(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField)
+    protected  <T,C> Optional<Object> getValueOfSourceField(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField)
     {
+     
         MapedField mapedField = targetObjectField.getAnnotation(MapedField.class);
         if (mapedField == null) throw new FillerException(targetObjectField.getName() + " is not annotated with @MapedField");
 
@@ -56,7 +65,6 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
             throw new FillerException(e.getMessage(), e);
         }
     }
-
     private <T> Optional<Object> mapCustom(MaperEntity<T> maperentity, MapedField mapedField)
     {
         if (!mapedField.custom()) return Optional.empty();
@@ -91,6 +99,20 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         if (mapedField.custom() || mapedField.fieldName() == null || mapedField.fieldName().isEmpty()) return null;
         Field sourceClassField = ReflectionUtil.findClassFieldByFieldName(maperEntity.getSource().getClass(), mapedField.fieldName());
         return ReflectionUtil.getFieldValueFromObject(sourceClassField, maperEntity.getSource());
+    }
+
+    protected <T,C> void SetValueToTarget(ConditionalMaperEntity<T,C> maperEntity, Field targetObjectField, Object object)
+    {
+        try
+        {
+            ReflectionUtil.setFieldValueToObject(targetObjectField, maperEntity.getTarget(), object);
+        }
+        catch (IllegalArgumentException e)
+        {
+            log.error("cant get value of {} from  ", targetObjectField.getName(), maperEntity.getSource());
+            throw new FillerException(e.getMessage(), e);
+        }
+
     }
 
 }

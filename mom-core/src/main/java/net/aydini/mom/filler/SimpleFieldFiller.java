@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.exception.FillerException;
-import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
 
@@ -29,7 +29,7 @@ public class SimpleFieldFiller extends AbstractBaseFiller
     private final static Logger log = LoggerFactory.getLogger(SimpleFieldFiller.class);
 
     @Override
-    protected <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field field)
+    protected <T,C> Optional<Object> getValueOfSourceField(ConditionalMaperEntity<T,C> maperEntity, Field field)
     {
         try
         {
