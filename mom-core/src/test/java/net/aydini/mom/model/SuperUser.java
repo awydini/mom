@@ -60,6 +60,19 @@ public class SuperUser
         this.person = person;
     }
     
+    public SuperUser(String username, String password, LocalDate registerDate)
+    {
+        super();
+        this.username = username;
+        this.password = password;
+        this.registerDate = registerDate;
+    }
+
+	public SuperUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
     
     
     

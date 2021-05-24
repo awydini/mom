@@ -3,7 +3,7 @@ package net.aydini.mom.mapper;
 import java.time.LocalDate;
 
 import net.aydini.mom.common.service.maper.Maper;
-import net.aydini.mom.model.UserDto;
+import net.aydini.mom.model.SuperUser;
 
 /**
  * 
@@ -11,11 +11,11 @@ import net.aydini.mom.model.UserDto;
  *
  * Apr 7, 2021
  */
-public class CustomDateMaper implements Maper<UserDto, LocalDate>
+public class CustomDateMaper implements Maper<SuperUser, LocalDate>
 {
 
     @Override
-    public LocalDate map(UserDto input)
+    public LocalDate map(SuperUser input)
     {
         if(input.getRegisterDate() == null)
             return null;
