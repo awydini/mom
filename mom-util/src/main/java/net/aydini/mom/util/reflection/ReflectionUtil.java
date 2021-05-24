@@ -150,7 +150,7 @@ public class ReflectionUtil
         }
         catch (Exception e)
         {
-            throw new MomBaseException(e);
+            throw new MomBaseException("no default constructor found",e);
         }
     }
     
