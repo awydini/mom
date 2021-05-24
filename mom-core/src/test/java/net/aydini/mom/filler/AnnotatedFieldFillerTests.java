@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import net.aydini.mom.common.holder.ConditionalMaperEntity;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.model.Person;
@@ -32,7 +31,7 @@ public class AnnotatedFieldFillerTests
     public void init()
     {
         filler = new AnnotatedFieldFiller(null);
-        maperEntity = new ConditionalMaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class,null);
+        maperEntity = new MaperEntity<>(new UserDto("aydin","123",LocalDate.now()), User.class);
     }
     
     @Test
