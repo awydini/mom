@@ -21,9 +21,4 @@ public class FillerFactory
         return new SimpleFieldFiller(objectMaper);
     }
 
-    public static FieldFiller getConditionalFieldFiller(ObjectMaper objectMaper)
-    {
-        return new ConditionalFieldFiller(objectMaper);
-    }
-
 }
