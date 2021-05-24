@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.model.Person;
+import net.aydini.mom.model.SuperUser;
 import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
 import net.aydini.mom.util.reflection.ReflectionUtil;
@@ -51,14 +52,6 @@ public class AnnotatedFieldFillerTests
         assertEquals( "map"+( (UserDto) maperEntity.getSource()).getPassword(), ((User)maperEntity.getTarget()).getPassword());
     }
     
-    
-    @Test
-    public void fillWithCustomMapper()
-    {
-        filler.fill(maperEntity, ReflectionUtil.findClassFieldByFieldName(User.class, "registerDate"));
-        assertNotNull(maperEntity.getTarget());
-        assertEquals( ( (UserDto) maperEntity.getSource()).getRegisterDate().plusDays(5), ((User)maperEntity.getTarget()).getRegisterDate());
-    }
     
 
     @Test

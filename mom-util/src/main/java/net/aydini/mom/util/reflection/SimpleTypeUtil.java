@@ -27,8 +27,8 @@ public class SimpleTypeUtil
     {
         SIMPLE_TYPE_LIST = Arrays.asList(new Class[] { 
         		Byte.class, Short.class, Integer.class, Float.class, Double.class, Boolean.class,Character.class,
-                Long.class, BigDecimal.class, BigInteger.class, String.class, java.util.Date.class, java.sql.Date.class, LocalDate.class,LocalDateTime.class,
-                Timestamp.class,Calendar.class,GregorianCalendar.class,LocalTime.class, Object.class 
+                Long.class, BigDecimal.class, BigInteger.class, String.class, java.util.Date.class, java.sql.Date.class, 
+                LocalDate.class,LocalDateTime.class,Timestamp.class,Calendar.class,GregorianCalendar.class,LocalTime.class, Object.class 
                 });
     }
 
