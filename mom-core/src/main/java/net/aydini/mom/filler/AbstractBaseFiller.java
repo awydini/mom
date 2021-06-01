@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.aydini.mom.common.exception.FillerException;
+import net.aydini.mom.common.exception.MomBaseException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.common.service.maper.ObjectMaper;
@@ -33,7 +33,13 @@ public abstract class AbstractBaseFiller implements FieldFiller
 
     public final <T> void fill(MaperEntity<T> maperEntity, Field field)
     {
-        Optional<Object> fieldValue = getValueOfSourceField(maperEntity, field);
+        Optional<Object> fieldValue = null;
+        
+        try {
+			fieldValue = getValueOfSourceField(maperEntity, field);
+		} catch (Exception e) {
+			onGetValueError(e, field);
+		}
         if (!fieldValue.isPresent()) return;
         if (ReflectionUtil.isSimpleType(fieldValue.get().getClass())
                 || ReflectionUtil.sameTypes(fieldValue.get().getClass(), field.getType()))
@@ -41,6 +47,9 @@ public abstract class AbstractBaseFiller implements FieldFiller
         else SetValueToTarget(maperEntity, field, objectMapper.map(fieldValue.get(), field.getType()));
     }
 
+    protected abstract void onSetValueError(Exception exception,Field targetObjectField, Object object) throws MomBaseException;
+    
+    protected abstract void onGetValueError(Exception exception, Field field) throws MomBaseException;
 
     protected abstract <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field targetObjectField);
 
@@ -50,10 +59,10 @@ public abstract class AbstractBaseFiller implements FieldFiller
         {
             ReflectionUtil.setFieldValueToObject(targetObjectField, maperEntity.getTarget(), object);
         }
-        catch (IllegalArgumentException e)
+        catch (Exception e)
         {
             log.error("cant get value of {} from  ", targetObjectField.getName(), maperEntity.getSource());
-            throw new FillerException(e.getMessage(), e);
+            onSetValueError(e,targetObjectField,object);
         }
 
     }
