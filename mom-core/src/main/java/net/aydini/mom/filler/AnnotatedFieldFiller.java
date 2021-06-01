@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
+import net.aydini.mom.common.exception.MomBaseException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.maper.Maper;
 import net.aydini.mom.common.service.maper.ObjectMaper;
@@ -91,5 +92,20 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         Field sourceClassField = ReflectionUtil.findClassFieldByFieldName(maperEntity.getSource().getClass(), mapedField.fieldName());
         return ReflectionUtil.getFieldValueFromObject(sourceClassField, maperEntity.getSource());
     }
+
+	@Override
+	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
+			throws MomBaseException {
+
+		log.error("error setting {} of type {} to {}",object,object!=null? object.getClass().getTypeName() : "-",targetObjectField.getName());
+		throw new MomBaseException(exception.getMessage(),exception);
+		
+	}
+
+	@Override
+	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
+		log.error("error getting value from field {}",field.getName());
+		throw new MomBaseException(exception.getMessage(),exception);
+	}
 
 }

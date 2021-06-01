@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.aydini.mom.common.exception.FillerException;
+import net.aydini.mom.common.exception.MomBaseException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.maper.ObjectMaper;
 import net.aydini.mom.util.reflection.ReflectionUtil;
@@ -41,6 +42,20 @@ public class SimpleFieldFiller extends AbstractBaseFiller
             throw new FillerException(e.getMessage(), e);
         }
     }
+
+	@Override
+	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
+			throws MomBaseException {
+		log.warn("error setting {} of type {} to {}",object,object!=null? object.getClass().getTypeName() : "-",targetObjectField.getName());
+		
+	}
+
+	@Override
+	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
+		log.warn("error getting value from field {}",field.getName());
+		
+	}
+
 
 
 }
