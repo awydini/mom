@@ -1,14 +1,17 @@
 package net.aydini.mom.util.reflection;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import net.aydini.mom.common.exception.MomBaseException;
 
@@ -133,7 +136,8 @@ public class ReflectionUtil
 
     public static boolean hasSuperClass(Class<?> clazz)
     {
-        return !getSuperClass(clazz).equals(Object.class);
+    	Class<?> superClass = getSuperClass(clazz);
+        return superClass ==null? false : !superClass.equals(Object.class);
     }
 
     public static boolean isSimpleType(Class<?> clazz)
@@ -163,5 +167,12 @@ public class ReflectionUtil
     public static boolean sameTypes(Class<?> t1 , Class<?> t2)
     {
         return t1.equals(t2);
+    }
+    
+    
+    
+    public static boolean isCollection(Class<?> clazz)
+    {
+    	return Collection.class.isAssignableFrom(clazz);
     }
 }
