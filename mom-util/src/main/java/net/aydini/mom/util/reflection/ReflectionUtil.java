@@ -1,17 +1,18 @@
 package net.aydini.mom.util.reflection;
 
-import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import net.aydini.mom.common.exception.MomBaseException;
 
@@ -175,4 +176,32 @@ public class ReflectionUtil
     {
     	return Collection.class.isAssignableFrom(clazz);
     }
+    
+    
+    public static boolean isSet(Class<?> clazz)
+    {
+    	return Set.class.isAssignableFrom(clazz);
+    }
+    
+    
+    public static boolean isList(Class<?> clazz)
+    {
+    	return List.class.isAssignableFrom(clazz) ;
+    }
+    
+    public static boolean isMap(Class<?> clazz)
+    {
+    	return  Map.class.isAssignableFrom(clazz);
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+	public static <T> Class<T> getGenericType(Field field)
+    {
+    	ParameterizedType type = (ParameterizedType) field.getGenericType();
+        return (Class<T>) type.getActualTypeArguments()[0];
+    }
+    
+
+    
 }
