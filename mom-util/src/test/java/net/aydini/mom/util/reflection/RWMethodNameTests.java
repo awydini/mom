@@ -28,7 +28,8 @@ public class RWMethodNameTests
         private boolean boolField;
         private String stringField;
         private Boolean boxedBoolField;
-        private Long longField;
+        @SuppressWarnings("unused")
+		private Long longField;
 
         public boolean isBoolField()
         {

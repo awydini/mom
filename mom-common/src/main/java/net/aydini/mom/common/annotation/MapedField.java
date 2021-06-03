@@ -22,7 +22,8 @@ public @interface MapedField
     
     boolean custom() default false;
     
-    Class<? extends Maper> maper() default Maper.class;
+    @SuppressWarnings("rawtypes")
+	Class<? extends Maper> maper() default Maper.class;
     
     DefaultValue defaultValue() default DefaultValue.NULL;
 }

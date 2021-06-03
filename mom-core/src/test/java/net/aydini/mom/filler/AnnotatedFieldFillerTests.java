@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.model.Person;
-import net.aydini.mom.model.SuperUser;
 import net.aydini.mom.model.User;
 import net.aydini.mom.model.UserDto;
 import net.aydini.mom.util.reflection.ReflectionUtil;
