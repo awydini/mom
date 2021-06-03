@@ -29,6 +29,7 @@
 		<module>mom-core</module>
 		<module>mom-util</module>
 		<module>mom-common</module>
+		<module>test</module>
 	</modules>
 
 	<dependencies>
