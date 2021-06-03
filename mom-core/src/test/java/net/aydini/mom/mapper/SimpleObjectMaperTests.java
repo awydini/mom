@@ -33,7 +33,6 @@ public class SimpleObjectMaperTests
     public void objectMaperTestWithDifferentPersonType()
     {
 
-        long start = System.currentTimeMillis();
         SuperUser superUser = objectMaper.map(user, SuperUser.class);
 
         assertEquals(user.getUsername(), superUser.getUsername());
