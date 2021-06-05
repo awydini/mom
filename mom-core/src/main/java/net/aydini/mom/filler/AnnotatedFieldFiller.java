@@ -3,6 +3,8 @@ package net.aydini.mom.filler;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
@@ -20,6 +22,8 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
  */
 public class AnnotatedFieldFiller extends AbstractBaseFiller
 {
+	
+	private static final Logger log = Logger.getLogger( AnnotatedFieldFiller.class.getName() );
 
     AnnotatedFieldFiller(ObjectMaper objectMapper)
     {
@@ -89,13 +93,14 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
 	@Override
 	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
 			throws MomBaseException {
-
+		log.log(Level.SEVERE, "error setting "+ object +" to  field " +targetObjectField.getName(),exception);
 		throw new MomBaseException(exception.getMessage(),exception);
 		
 	}
 
 	@Override
 	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
+		log.log(Level.SEVERE, "error reading value of field "+field.getName() ,exception);
 		throw new MomBaseException(exception.getMessage(),exception);
 	}
 
