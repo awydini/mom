@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.exception.MomBaseException;
@@ -29,7 +26,6 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         super(objectMapper);
     }
 
-    private final static Logger log = LoggerFactory.getLogger(AnnotatedFieldFiller.class);
 
     @Override
     protected <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field targetObjectField)
@@ -50,9 +46,6 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         }
         catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e)
         {
-            log.error("cant get value of {} from  ",
-                    mapedField.fieldName().isEmpty() == false ? mapedField.fieldName() : targetObjectField.getName(),
-                    maperEntity.getSource());
             throw new FillerException(e.getMessage(), e);
         }
     }
@@ -97,14 +90,12 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
 	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
 			throws MomBaseException {
 
-		log.error("error setting {} of type {} to {}",object,object!=null? object.getClass().getTypeName() : "-",targetObjectField.getName());
 		throw new MomBaseException(exception.getMessage(),exception);
 		
 	}
 
 	@Override
 	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
-		log.error("error getting value from field {}",field.getName());
 		throw new MomBaseException(exception.getMessage(),exception);
 	}
 

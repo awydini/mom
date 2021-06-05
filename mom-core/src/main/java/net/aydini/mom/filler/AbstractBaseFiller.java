@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.aydini.mom.common.exception.MomBaseException;
 import net.aydini.mom.common.holder.MaperEntity;
 import net.aydini.mom.common.service.filler.FieldFiller;
@@ -23,7 +20,6 @@ import net.aydini.mom.util.reflection.ReflectionUtil;
  */
 public abstract class AbstractBaseFiller implements FieldFiller {
 
-	private final static Logger log = LoggerFactory.getLogger(AbstractBaseFiller.class);
 
 	private final ObjectMaper objectMapper;
 
@@ -64,7 +60,6 @@ public abstract class AbstractBaseFiller implements FieldFiller {
 		try {
 			ReflectionUtil.setFieldValueToObject(targetObjectField, maperEntity.getTarget(), object);
 		} catch (Exception e) {
-			log.error("cant get value of {} from  ", targetObjectField.getName(), maperEntity.getSource());
 			onSetValueError(e, targetObjectField, object);
 		}
 

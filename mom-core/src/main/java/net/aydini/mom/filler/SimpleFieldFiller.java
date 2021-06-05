@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.aydini.mom.common.exception.FillerException;
 import net.aydini.mom.common.exception.MomBaseException;
 import net.aydini.mom.common.holder.MaperEntity;
@@ -27,7 +24,6 @@ public class SimpleFieldFiller extends AbstractBaseFiller
         super(objectMapper);
     }
 
-    private final static Logger log = LoggerFactory.getLogger(SimpleFieldFiller.class);
 
     @Override
     protected <T> Optional<Object> getValueOfSourceField(MaperEntity<T> maperEntity, Field field)
@@ -38,7 +34,6 @@ public class SimpleFieldFiller extends AbstractBaseFiller
         }
         catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e)
         {
-            log.error("cant get value of {} from  ", field.getName(), maperEntity.getSource());
             throw new FillerException(e.getMessage(), e);
         }
     }
@@ -46,13 +41,11 @@ public class SimpleFieldFiller extends AbstractBaseFiller
 	@Override
 	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
 			throws MomBaseException {
-		log.warn("error setting {} of type {} to {}",object,object!=null? object.getClass().getTypeName() : "-",targetObjectField.getName());
 		
 	}
 
 	@Override
 	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
-		log.warn("error getting value from field {}",field.getName());
 		
 	}
 
