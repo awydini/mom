@@ -6,24 +6,8 @@
 	<parent>
 		<groupId>net.aydini.mom</groupId>
 		<artifactId>mom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-
-	<dependencies>
-		<dependency>
-			<groupId>net.aydini.mom</groupId>
-			<artifactId>mom-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.aydini.mom</groupId>
-			<artifactId>mom-util</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-
-	</dependencies>
 </project>

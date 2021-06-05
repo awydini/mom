@@ -5,9 +5,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
-import net.jodah.expiringmap.ExpiringMap;
 
 
 /**
@@ -18,29 +16,10 @@ import net.jodah.expiringmap.ExpiringMap;
 public class FieldWarehouse
 {
 	
+	private final static Map<String, Set<Field>> classFields = new HashMap<>();
 	
 	
-	private final static Map<String, Set<Field>> classFields;
-	
-	
-	private final static Map<Map<String, String>, Set<Field>> annotatedClassFieldsMap;
-	
-	
-	static 
-	{
-		classFields = ExpiringMap.builder()
-				  .maxSize(127)
-				  .expiration(60, TimeUnit.MINUTES)
-				  .build();
-		
-		
-		annotatedClassFieldsMap = ExpiringMap.builder()
-				  .maxSize(127)
-				  .expiration(60, TimeUnit.MINUTES)
-				  .build();
-	}
-	
-
+	private final static Map<Map<String, String>, Set<Field>> annotatedClassFieldsMap= new HashMap<>();
 
 
     private FieldWarehouse()
