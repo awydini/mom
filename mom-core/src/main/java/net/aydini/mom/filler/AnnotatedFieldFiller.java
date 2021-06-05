@@ -68,7 +68,7 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
     }
 
     @SuppressWarnings("unchecked")
-    private Optional<Maper<Object,Object>> getMapedFieldMaper(MapedField mapedField)
+    protected Optional<Maper<Object,Object>> getMapedFieldMaper(MapedField mapedField)
     {
         if (!hasMaper(mapedField)) return Optional.empty();
         return Optional.of((Maper<Object,Object>)ReflectionUtil.instantiate(mapedField.maper()));
