@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import net.aydini.mom.common.annotation.MapedField;
 import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.common.service.maper.ObjectMaper;
+import net.aydini.mom.mapper.SimpleObjectMaper;
 
 /**
  * 
@@ -19,6 +20,11 @@ public class FillerFactory
     {
         if (field.isAnnotationPresent(MapedField.class)) return new AnnotatedFieldFiller(objectMaper);
         return new SimpleFieldFiller(objectMaper);
+    }
+    
+    public static FieldFiller getSimpleFieldFiller(SimpleObjectMaper objectMaper)
+    {
+    	return new SimpleFieldFiller(objectMaper);
     }
 
 }

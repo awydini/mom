@@ -4,8 +4,9 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 import net.aydini.mom.common.holder.MaperEntity;
+import net.aydini.mom.common.service.filler.FieldFiller;
 import net.aydini.mom.common.service.maper.ObjectMaper;
-import net.aydini.mom.filler.FillerFactory;
+import net.aydini.mom.util.reflection.FieldWarehouse;
 
 /**
  * 
@@ -25,10 +26,15 @@ public abstract class AbstractObjectMaper implements ObjectMaper
     protected  <T> T map(final MaperEntity<T> maperEntity)
     {
         getMapingFields(maperEntity.getTargetClass()).parallelStream()
-        .forEach(item->FillerFactory.getFieldFiller(item, this).fill(maperEntity, item));
+        .forEach(item->getFieldFiller(item).fill(maperEntity, item));
         return maperEntity.getTarget();
     }
     
-    protected abstract <T> Set<Field> getMapingFields(Class<T> targetClass);
+    protected abstract FieldFiller getFieldFiller(Field field);
+    
+    protected  <T> Set<Field> getMapingFields(Class<T> targetClass)
+    {
+    	return FieldWarehouse.getClassFields(targetClass);
+    }
 
 }
