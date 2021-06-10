@@ -20,8 +20,8 @@
 
 		<dependency>
 			<groupId>net.aydini.mom</groupId>
-			<artifactId>mom-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>mom</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
