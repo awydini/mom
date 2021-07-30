@@ -5,56 +5,42 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-
+import java.util.WeakHashMap;
 
 /**
  * 
  * @author aydin
  *
  */
-public class FieldWarehouse
-{
-	
-	private final static Map<String, Set<Field>> classFields = new HashMap<>();
-	
-	
-	private final static Map<Map<String, String>, Set<Field>> annotatedClassFieldsMap= new HashMap<>();
+public class FieldWarehouse {
 
+	private final Map<String, Set<Field>> classFields = new WeakHashMap<>();
 
-    private FieldWarehouse()
-    {};
+	private final Map<Map<String, String>, Set<Field>> annotatedClassFieldsMap = new WeakHashMap<>();
 
+	public Set<Field> getClassFields(Class<?> clazz) {
+		if (!classFields.containsKey(clazz.getName()))
+			addClassFields(clazz);
+		return classFields.get(clazz.getName());
+	}
 
-    public static Set<Field> getClassFields(Class<?> clazz)
-    {
-        addClassFields(clazz);
-        return classFields.get(clazz.getName());
-    }
+	private synchronized void addClassFields(Class<?> clazz) {
+		classFields.put(clazz.getName(), ReflectionUtil.getClassFields(clazz));
+	}
 
-    private static void addClassFields(Class<?> clazz)
-    {
-        if (!classFields.containsKey(clazz.getName()))
-            classFields.put(clazz.getName(), ReflectionUtil.getClassFields(clazz));
-    }
+	public Set<Field> getAnnotatedClassFields(Class<?> clazz, Class<? extends Annotation> annotation) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put(clazz.getName(), annotation.getName());
+		if (!annotatedClassFieldsMap.containsKey(map))
+			addAnnotatedClassFields(clazz, annotation);
+		return annotatedClassFieldsMap.get(map);
+	}
 
-    public static Set<Field> getAnnotatedClassFields(Class<?> clazz, Class<? extends Annotation> annotation)
-    {
-        addAnnotatedClassFields(clazz, annotation);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put(clazz.getName(), annotation.getName());
-        return annotatedClassFieldsMap.get(map);
-    }
+	private synchronized void addAnnotatedClassFields(Class<?> clazz, Class<? extends Annotation> annotation) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put(clazz.getName(), annotation.getName());
 
-    private static void addAnnotatedClassFields(Class<?> clazz, Class<? extends Annotation> annotation)
-    {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put(clazz.getName(), annotation.getName());
-
-        if (!annotatedClassFieldsMap.containsKey(map))
-        {
-            annotatedClassFieldsMap.put(map, ReflectionUtil.getAnnotatedClassFields(clazz, annotation));
-        }
-    }
+		annotatedClassFieldsMap.put(map, ReflectionUtil.getAnnotatedClassFields(clazz, annotation));
+	}
 
 }

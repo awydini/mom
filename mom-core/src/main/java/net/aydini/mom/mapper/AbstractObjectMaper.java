@@ -34,7 +34,7 @@ public abstract class AbstractObjectMaper implements ObjectMaper
     
     protected  <T> Set<Field> getMapingFields(Class<T> targetClass)
     {
-    	return FieldWarehouse.getClassFields(targetClass);
+    	return new FieldWarehouse().getClassFields(targetClass);
     }
 
 }
