@@ -14,3 +14,6 @@ ClassB instanceOfClassB = objectMaper.map(instanceOfClassA, ClassB.class);
 ```
 
 ## How to install
+
+```java
+mvn clean install
