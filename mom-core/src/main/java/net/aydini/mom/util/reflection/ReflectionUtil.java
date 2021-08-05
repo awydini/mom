@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import net.aydini.mom.common.exception.MomBaseException;
@@ -39,6 +40,10 @@ public class ReflectionUtil
         return fields;
     }
 
+    public static Set<Field> getClassFields(Class<?> clazz,Predicate<Field> predicate)
+    {
+        return getClassFields(clazz).stream().filter(predicate).collect(Collectors.toSet());
+    }
 
     @SafeVarargs
     public static <T extends Annotation> Set<Field> getAnnotatedClassFields(Class<?> clazz, Class<T>... annotations)
@@ -92,6 +97,15 @@ public class ReflectionUtil
         Optional<Method> optionalGetterMethod = RWProperty.getReaderMethod(object.getClass(), field);
         if(optionalGetterMethod.isPresent())
         	return optionalGetterMethod.get().invoke(object, new Object[] {});
+        return null;
+    }
+    
+    public static <T> T getFieldValueFromObject(Field field, Object object,Class<T> type)
+            throws IllegalArgumentException, IllegalAccessException, InvocationTargetException
+    {
+        Optional<Method> optionalGetterMethod = RWProperty.getReaderMethod(object.getClass(), field);
+        if(optionalGetterMethod.isPresent())
+        	return type.cast(optionalGetterMethod.get().invoke(object, new Object[] {}));
         return null;
     }
 
