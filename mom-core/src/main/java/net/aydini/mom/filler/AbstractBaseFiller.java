@@ -37,6 +37,8 @@ public abstract class AbstractBaseFiller implements FieldFiller {
 		} catch (Exception e) {
 			onGetValueError(e, field);
 		}
+		try
+		{
 		if (!fieldValue.isPresent())
 			return;
 		else if (ReflectionUtil.isSimpleType(fieldValue.get().getClass())) 
@@ -47,6 +49,10 @@ public abstract class AbstractBaseFiller implements FieldFiller {
 			SetValueToTarget(maperEntity, field, fieldValue.get());
 		else
 			SetValueToTarget(maperEntity, field, objectMapper.map(fieldValue.get(), field.getType()));
+		}catch(Exception e)
+		{
+			onSetValueError(e, field, maperEntity.getTarget());
+		}
 	}
 
 	protected abstract void onSetValueError(Exception exception, Field targetObjectField, Object object)
