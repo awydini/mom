@@ -14,8 +14,17 @@ public class Person {
 	
 	private List<Phone> phones;
 	
+	private PersonType personType;
 	
-	
+
+	public PersonType getPersonType() {
+		return personType;
+	}
+
+
+	public void setPersonType(PersonType personType) {
+		this.personType = personType;
+	}
 
 
 	public List<Phone> getPhones() {

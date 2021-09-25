@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import net.aydini.mom.model.Person;
 import net.aydini.mom.model.SuperUser;
 import net.aydini.mom.model.User;
+import net.aydini.mom.test.model.PersonType;
 
 public class SimpleObjectMaperTests
 {
@@ -25,6 +26,7 @@ public class SimpleObjectMaperTests
         user = new User("aydin", "123", LocalDate.now());
         Person person = new Person();
         person.setAge(18);
+        person.setPersonType(PersonType.INDIVIDUAL);
         person.setName("joe");
         user.setPerson(person);
     }
@@ -41,6 +43,10 @@ public class SimpleObjectMaperTests
         assertNotNull(user.getPerson());
         assertEquals(user.getPerson().getName(), superUser.getPerson().getName());
         assertEquals(user.getPerson().getAge(), superUser.getPerson().getAge());
+        assertNotNull(superUser.getPerson().getPersonType());
+        assertEquals(user.getPerson().getPersonType().name(), superUser.getPerson().getPersonType().name());
 
     }
+    
+    
 }
