@@ -216,6 +216,17 @@ public class ReflectionUtil
         return (Class<T>) type.getActualTypeArguments()[0];
     }
     
+    
+    public static boolean isEnum(Class<?> clazz)
+    {
+    	return clazz.isEnum();
+    }
 
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static  Enum<?> createEnumByName(Class<?> enumType,String name)
+    {
+    	return Enum.valueOf((Class<Enum>) enumType, name);
+    }
     
 }
