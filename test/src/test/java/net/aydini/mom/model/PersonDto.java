@@ -1,12 +1,23 @@
 package net.aydini.mom.model;
 
+import net.aydini.mom.test.model.PersonTypeEunm;
+
 public class PersonDto
 {
 
     private String name;
     private Integer age;
+    private PersonTypeEunm personType;
     
-    public String getName()
+    
+    
+    public PersonTypeEunm getPersonType() {
+		return personType;
+	}
+	public void setPersonType(PersonTypeEunm personType) {
+		this.personType = personType;
+	}
+	public String getName()
     {
         return name;
     }

@@ -1,12 +1,24 @@
 package net.aydini.mom.model;
 
+import net.aydini.mom.test.model.PersonType;
+
 public class Person
 {
 
     private String name;
     private Integer age;
+    private PersonType personType;
     
-    public String getName()
+    
+    
+    
+    public PersonType getPersonType() {
+		return personType;
+	}
+	public void setPersonType(PersonType personType) {
+		this.personType = personType;
+	}
+	public String getName()
     {
         return name;
     }

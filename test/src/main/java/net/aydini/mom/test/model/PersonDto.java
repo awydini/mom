@@ -14,7 +14,22 @@ public class PersonDto {
 	
 	private List<PhoneDto> phones;
 	
+	private PersonTypeEunm personType;
 	
+	
+	
+	
+	
+
+	public PersonTypeEunm getPersonType() {
+		return personType;
+	}
+
+
+	public void setPersonType(PersonTypeEunm personType) {
+		this.personType = personType;
+	}
+
 
 	public List<PhoneDto> getPhones() {
 		return phones;
