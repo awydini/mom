@@ -47,6 +47,8 @@ public abstract class AbstractBaseFiller implements FieldFiller {
 			 SetValueToTarget(maperEntity, field, new CollectionMapper(objectMapper).map(((List<Object>)fieldValue.get()).stream().map(item->(Object)item).collect(Collectors.toList()), field)); 
 		else if (ReflectionUtil.sameTypes(fieldValue.get().getClass(), field.getType())) 
 			SetValueToTarget(maperEntity, field, fieldValue.get());
+		else if(ReflectionUtil.isEnum(fieldValue.get().getClass()) && ReflectionUtil.isEnum(field.getType()))
+			SetValueToTarget(maperEntity, field,ReflectionUtil.createEnumByName(field.getType(), fieldValue.get().toString()) );
 		else
 			SetValueToTarget(maperEntity, field, objectMapper.map(fieldValue.get(), field.getType()));
 		}catch(Exception e)
