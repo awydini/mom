@@ -16,7 +16,7 @@ public class SimpleObjectMaper extends AbstractObjectMaper
 
 	@Override
 	protected FieldFiller getFieldFiller(Field field) {
-		return FillerFactory.getSimpleFieldFiller(this);
+		return new FillerFactory().getSimpleFieldFiller(this);
 	}
 	
 
