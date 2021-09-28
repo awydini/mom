@@ -16,13 +16,13 @@ import net.aydini.mom.mapper.SimpleObjectMaper;
 public class FillerFactory
 {
 
-    public static FieldFiller getFieldFiller(Field field, ObjectMaper objectMaper)
+    public FieldFiller getFieldFiller(Field field, ObjectMaper objectMaper)
     {
         if (field.isAnnotationPresent(MapedField.class)) return new AnnotatedFieldFiller(objectMaper);
         return new SimpleFieldFiller(objectMaper);
     }
     
-    public static FieldFiller getSimpleFieldFiller(SimpleObjectMaper objectMaper)
+    public FieldFiller getSimpleFieldFiller(SimpleObjectMaper objectMaper)
     {
     	return new SimpleFieldFiller(objectMaper);
     }

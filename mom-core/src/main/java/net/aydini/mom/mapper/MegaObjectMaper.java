@@ -16,7 +16,7 @@ public class MegaObjectMaper extends AbstractObjectMaper
 
 	@Override
 	protected FieldFiller getFieldFiller(Field field) {
-		return FillerFactory.getFieldFiller(field, this);
+		return new FillerFactory().getFieldFiller(field, this);
 	}
 
 }
