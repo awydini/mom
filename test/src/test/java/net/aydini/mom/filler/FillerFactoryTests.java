@@ -22,7 +22,7 @@ public class FillerFactoryTests
     @Test
     public void shouldCreateAnnotatedFieldFiller()
     {
-        FieldFiller fieldFiller = FillerFactory.getFieldFiller(ReflectionUtil.findClassFieldByFieldName(User.class, "username"), null);
+        FieldFiller fieldFiller = new FillerFactory().getFieldFiller(ReflectionUtil.findClassFieldByFieldName(User.class, "username"), null);
         assertNotNull(fieldFiller);
         assertTrue(fieldFiller instanceof AnnotatedFieldFiller);
         
@@ -32,7 +32,7 @@ public class FillerFactoryTests
     @Test
     public void shouldCreateSimpleFieldFiller()
     {
-        FieldFiller fieldFiller = FillerFactory.getFieldFiller(ReflectionUtil.findClassFieldByFieldName(UserDto.class, "username"), null);
+        FieldFiller fieldFiller = new FillerFactory().getFieldFiller(ReflectionUtil.findClassFieldByFieldName(UserDto.class, "username"), null);
         assertNotNull(fieldFiller);
         assertTrue(fieldFiller instanceof SimpleFieldFiller);
         
