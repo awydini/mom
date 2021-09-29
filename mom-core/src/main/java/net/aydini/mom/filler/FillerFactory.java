@@ -19,10 +19,10 @@ public class FillerFactory
     public FieldFiller getFieldFiller(Field field, ObjectMaper objectMaper)
     {
         if (field.isAnnotationPresent(MapedField.class)) return createAnnotatedFieldFiller(objectMaper);
-        return createSimpleFieldFiller();
+        return getSimpleFieldFiller(objectMaper);
     }
     
-    public FieldFiller getSimpleFieldFiller(SimpleObjectMaper objectMaper)
+    public FieldFiller getSimpleFieldFiller(ObjectMaper objectMaper)
     {
     	return new SimpleFieldFiller(objectMaper);
     }
