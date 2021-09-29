@@ -25,7 +25,7 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
 	
 	private static final Logger log = Logger.getLogger( AnnotatedFieldFiller.class.getName() );
 
-    AnnotatedFieldFiller(ObjectMaper objectMapper)
+    protected AnnotatedFieldFiller(ObjectMaper objectMapper)
     {
         super(objectMapper);
     }
@@ -62,7 +62,7 @@ public class AnnotatedFieldFiller extends AbstractBaseFiller
         return Optional.empty();
     }
 
-    private boolean hasMaper(MapedField mapedField)
+    protected boolean hasMaper(MapedField mapedField)
     {
         return mapedField.maper() != Maper.class;
     }
