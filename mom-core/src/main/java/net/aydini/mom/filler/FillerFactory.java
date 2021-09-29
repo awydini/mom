@@ -18,8 +18,8 @@ public class FillerFactory
 
     public FieldFiller getFieldFiller(Field field, ObjectMaper objectMaper)
     {
-        if (field.isAnnotationPresent(MapedField.class)) return new AnnotatedFieldFiller(objectMaper);
-        return new SimpleFieldFiller(objectMaper);
+        if (field.isAnnotationPresent(MapedField.class)) return createAnnotatedFieldFiller(objectMaper);
+        return createSimpleFieldFiller();
     }
     
     public FieldFiller getSimpleFieldFiller(SimpleObjectMaper objectMaper)
@@ -27,4 +27,14 @@ public class FillerFactory
     	return new SimpleFieldFiller(objectMaper);
     }
 
+    
+    protected FieldFiller createAnnotatedFieldFiller(ObjectMaper objectMaper)
+    {
+    	return new AnnotatedFieldFiller(objectMaper);
+    }
+    
+    protected FieldFiller createSimpleFieldFiller()
+    {
+    	return getSimpleFieldFiller(new SimpleObjectMaper());
+    }
 }
