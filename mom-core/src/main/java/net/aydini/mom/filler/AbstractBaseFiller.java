@@ -1,7 +1,7 @@
 package net.aydini.mom.filler;
 
 import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -44,7 +44,7 @@ public abstract class AbstractBaseFiller implements FieldFiller {
 		else if (ReflectionUtil.isSimpleType(fieldValue.get().getClass())) 
 			SetValueToTarget(maperEntity, field, fieldValue.get());
 		else if(ReflectionUtil.isCollection(fieldValue.get().getClass()) && ReflectionUtil.isCollection(field.getType()))
-			 SetValueToTarget(maperEntity, field, new CollectionMapper(objectMapper).map(((List<Object>)fieldValue.get()).stream().map(item->(Object)item).collect(Collectors.toList()), field)); 
+			 SetValueToTarget(maperEntity, field, new CollectionMapper(objectMapper).map(((Collection<Object>)fieldValue.get()).stream().map(item->(Object)item).collect(Collectors.toList()), field)); 
 		else if (ReflectionUtil.sameTypes(fieldValue.get().getClass(), field.getType())) 
 			SetValueToTarget(maperEntity, field, fieldValue.get());
 		else if(ReflectionUtil.isEnum(fieldValue.get().getClass()) && ReflectionUtil.isEnum(field.getType()))
