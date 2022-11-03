@@ -44,12 +44,17 @@ public class SimpleFieldFiller extends AbstractBaseFiller
 	@Override
 	protected void onSetValueError(Exception exception, Field targetObjectField, Object object)
 			throws MomBaseException {
+    	if(exception.getClass().getName().equals("org.hibernate.LazyInitializationException"))
+    		return;
 		log.log(Level.SEVERE, "error setting "+ object +" to  field " +targetObjectField.getName(),exception);
 		
 	}
 
 	@Override
 	protected void onGetValueError(Exception exception, Field field) throws MomBaseException {
+		
+    	if(exception.getClass().getName().equals("org.hibernate.LazyInitializationException"))
+    		return;
 		log.log(Level.SEVERE, "error reading value of field "+field.getName() ,exception);
 	}
 
